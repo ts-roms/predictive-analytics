@@ -1,4 +1,3 @@
-// app/predict-performance/page.tsx
 'use client';
 
 import { useState } from 'react';
@@ -30,10 +29,10 @@ export default function PredictPerformancePage() {
   const handlePredict = async () => {
     // Basic validation
     const numericMetrics = Object.fromEntries(
-      Object.entries(metrics).map(([key, value]) => [key, parseFloat(value)])
+      Object.entries(metrics).map(([key, value]) => [key, Number.parseFloat(value)])
     );
 
-    if (Object.values(numericMetrics).some(isNaN)) {
+    if (Object.values(numericMetrics).some(Number.isNaN)) {
       toast.error('Please enter valid numbers for all metrics.');
       return;
     }
@@ -57,7 +56,7 @@ export default function PredictPerformancePage() {
       }
 
       const data = await response.json();
-      const predictedScore = parseFloat(data.prediction.toFixed(2));
+      const predictedScore = Number.parseFloat(data.prediction.toFixed(2));
       setPrediction(predictedScore);
 
       if (predictedScore < PERFORMANCE_THRESHOLD) {
@@ -75,7 +74,7 @@ export default function PredictPerformancePage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-6 bg-gradient-to-br from-green-50 to-teal-100">
+    <div className="flex min-h-screen flex-col items-center justify-center p-6 bg-linear-to-br from-green-50 to-teal-100">
       <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-4xl flex flex-col md:flex-row gap-8">
         {/* Input Form */}
         <div className="md:w-1/2">

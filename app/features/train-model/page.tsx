@@ -1,4 +1,3 @@
-// app/train-model/page.tsx
 'use client';
 
 import { useState, useRef } from 'react';
@@ -15,7 +14,7 @@ export default function TrainModelPage() {
   const router = useRouter();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
+    if (event.target.files?.[0]) {
       setFile(event.target.files[0]);
       setTrainingResult(null); // Reset result on new file selection
     }
@@ -23,7 +22,7 @@ export default function TrainModelPage() {
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    if (event.dataTransfer.files && event.dataTransfer.files[0]) {
+    if (event.dataTransfer.files?.[0]) {
       setFile(event.dataTransfer.files[0]);
       setTrainingResult(null);
     }
